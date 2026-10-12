@@ -1,4 +1,5 @@
 package selectionSort;
+
 public interface SortingAlgorithm {
 
     void sort(int[] vetor);

@@ -1,4 +1,5 @@
 package selectionSort;
+
 public class SelectionSort implements SortingAlgorithm {
 
     private long comparacoes;
@@ -14,8 +15,7 @@ public class SelectionSort implements SortingAlgorithm {
 
         if (vetor == null) {
             throw new IllegalArgumentException(
-                "O vetor não pode ser nulo."
-            );
+                    "O vetor não pode ser nulo.");
         }
 
         long inicio = System.nanoTime();
