@@ -1,0 +1,10 @@
+tamanho;tipo;media_comparacoes;media_trocas;tempo_medio_ns;tempo_medio_ms;validacao
+100;Aleatorio;4950.0;91.0;89400.0;0.0894;Sim
+100;Crescente;4950.0;0.0;85350.0;0.08535;Sim
+100;Decrescente;4950.0;50.0;172425.0;0.172425;Sim
+1000;Aleatorio;499500.0;995.0;1153475.0;1.153475;Sim
+1000;Crescente;499500.0;0.0;288825.0;0.288825;Sim
+1000;Decrescente;499500.0;500.0;382425.0;0.382425;Sim
+5000;Aleatorio;1.24975E7;4989.0;9955325.0;9.955325;Sim
+5000;Crescente;1.24975E7;0.0;9614150.0;9.61415;Sim
+5000;Decrescente

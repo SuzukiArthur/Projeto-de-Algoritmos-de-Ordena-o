@@ -3,7 +3,6 @@ package QuickSort;
 import selectionSort.SortingAlgorithm; // importei a interface SortingAlgorithm do pacote selectionSort //
 import java.util.Random;
 
-
 public class QuickSort implements SortingAlgorithm {
 
     private long comparisons;
@@ -58,21 +57,34 @@ public class QuickSort implements SortingAlgorithm {
     }
 
     private void swap(int[] a, int i, int j) {
-        if (i == j) return; // não conta troca de um elemento com ele mesmo
+        if (i == j)
+            return; // não conta troca de um elemento com ele mesmo
         int tmp = a[i];
         a[i] = a[j];
         a[j] = tmp;
         swaps++;
     }
 
-    @Override public long getComparisons() { return comparisons; }
-    @Override public long getSwaps() { return swaps; }
-    @Override public long getExecutionTime() { return executionTime; }
+    @Override
+    public long getComparisons() {
+        return comparisons;
+    }
+
+    @Override
+    public long getSwaps() {
+        return swaps;
+    }
+
+    @Override
+    public long getExecutionTime() {
+        return executionTime;
+    }
 
     @Override
     public boolean isSorted(int[] array) {
         for (int i = 1; i < array.length; i++) {
-            if (array[i - 1] > array[i]) return false;
+            if (array[i - 1] > array[i])
+                return false;
         }
         return true;
     }
