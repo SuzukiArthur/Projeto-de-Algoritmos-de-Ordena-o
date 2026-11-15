@@ -17,8 +17,24 @@ public class Main {
         String[] tipos = {"aleatorio", "ordenado", "inverso"};
 
         new File("resultados").mkdirs();
-        try (PrintWriter csv = new PrintWriter("resultados/resultados.csv")) {
+        try (PrintWriter csv = new PrintWriter("resultados/resultados.csv");
+             PrintWriter bubbleCsv = new PrintWriter("resultados/resultados_bubble_sort.csv");
+             PrintWriter insertionCsv = new PrintWriter("resultados/resultados_insertion_sort.csv");
+             PrintWriter selectionCsv = new PrintWriter("resultados/resultados_selection_sort.csv");
+             PrintWriter mergeCsv = new PrintWriter("resultados/resultados_merge_sort.csv");
+             PrintWriter quickCsv = new PrintWriter("resultados/resultados_quick_sort.csv")) {
+            Map<String, PrintWriter> csvPorAlgoritmo = new LinkedHashMap<>();
+            csvPorAlgoritmo.put("Bubble", bubbleCsv);
+            csvPorAlgoritmo.put("Insertion", insertionCsv);
+            csvPorAlgoritmo.put("Selection", selectionCsv);
+            csvPorAlgoritmo.put("Merge", mergeCsv);
+            csvPorAlgoritmo.put("Quick", quickCsv);
+
             csv.println("algoritmo,tipo,n,tempo_ms,comparacoes,trocas,memoria_kb");
+            for (PrintWriter arquivo : csvPorAlgoritmo.values()) {
+                arquivo.println(
+                    "tamanho;tipo;media_comparacoes;media_trocas;tempo_medio_ns;tempo_medio_ms;validacao");
+            }
 
             for (String tipo : tipos) {
                 for (int n : TAMANHOS) {
@@ -30,7 +46,8 @@ public class Main {
                         if (quadraticos.contains(e.getKey()) && n > 50000) continue;
 
                         double somaTempo = 0, somaMem = 0;
-                        long comps = 0, trocas = 0;
+                        long somaComparacoes = 0, somaTrocas = 0;
+                        long somaTempoNs = 0;
 
                         for (int r = 0; r < EXECUCOES; r++) {
                             int[] copia = base.clone();
@@ -44,16 +61,26 @@ public class Main {
 
                             if (r == 0) continue; // warm-up descartado
                             somaTempo += e.getValue().getExecutionTime() / 1e6;
+                            somaTempoNs += e.getValue().getExecutionTime();
                             somaMem += Math.max(0, memDepois - memAntes) / 1024.0;
-                            comps = e.getValue().getComparisons();
-                            trocas = e.getValue().getSwaps();
+                            somaComparacoes += e.getValue().getComparisons();
+                            somaTrocas += e.getValue().getSwaps();
                         }
                         int validas = EXECUCOES - 1;
+                        double mediaComparacoes = somaComparacoes / (double) validas;
+                        double mediaTrocas = somaTrocas / (double) validas;
+                        double tempoMedioNs = somaTempoNs / (double) validas;
+                        double tempoMedioMs = somaTempo / validas;
+
                         csv.printf(Locale.US, "%s,%s,%d,%.4f,%d,%d,%.2f%n",
-                            e.getKey(), tipo, n, somaTempo / validas, comps, trocas,
-                            somaMem / validas);
+                            e.getKey(), tipo, n, tempoMedioMs, Math.round(mediaComparacoes),
+                            Math.round(mediaTrocas), somaMem / validas);
+                        csvPorAlgoritmo.get(e.getKey()).printf(
+                            Locale.US, "%d;%s;%.2f;%.2f;%.2f;%.6f;Sim%n",
+                            n, tipo, mediaComparacoes, mediaTrocas, tempoMedioNs,
+                            tempoMedioMs);
                         System.out.printf("%s | %s | n=%d | %.2f ms%n",
-                            e.getKey(), tipo, n, somaTempo / validas);
+                            e.getKey(), tipo, n, tempoMedioMs);
                     }
                 }
             }
