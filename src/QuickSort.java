@@ -3,8 +3,6 @@
  * Contabiliza comparações, trocas e tempo de execução.
  * 
  * @author Luiz Miguel Mazzega Lamas
- * @version 1.0
- * @since 2026
  */
 public class QuickSort extends BaseSort {
 
