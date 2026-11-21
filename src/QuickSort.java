@@ -1,7 +1,5 @@
 /**
- * Algoritmo Quick Sort para ordenação de vetores de inteiros.
- * Usa o particionamento de Lomuto com pivô escolhido pela mediana de três.
- * A recursão ocorre apenas na menor partição, mantendo a pilha em O(log n).
+ * Quick Sort com pivô por mediana de três e particionamento de Lomuto.
  * Contabiliza comparações, trocas e tempo de execução.
  * 
  * @author Luiz Miguel Mazzega Lamas
@@ -11,10 +9,9 @@
 public class QuickSort extends BaseSort {
 
     /**
-     * Ordena o vetor em ordem crescente (in-place) e registra as métricas.
+     * Ordena o vetor em ordem crescente e registra as métricas.
      * 
-     * @param a O vetor de inteiros a ser ordenado
-     * @throws NullPointerException se o vetor for nulo
+     * @param a O vetor a ser ordenado
      */
 
     @Override
@@ -27,11 +24,10 @@ public class QuickSort extends BaseSort {
 
     /**
      * Ordena recursivamente o subvetor {@code a[lo..hi]}.
-     * Recursão na menor partição e laço na maior, limitando a pilha a O(log n).
      * 
-     * @param a  O vetor que contém o subvetor
-     * @param lo O índice inicial (inclusivo)
-     * @param hi O índice final (inclusivo)
+     * @param a  O vetor
+     * @param lo O índice inicial
+     * @param hi O índice final
      */
 
     private void quickSort(int[] a, int lo, int hi) {
@@ -49,15 +45,14 @@ public class QuickSort extends BaseSort {
     }
 
     /**
-     * Particiona o subvetor {@code a[lo..hi]} em torno de um pivô
-     * escolhido pela mediana de três (esquema de Lomuto).
+     * Particiona o subvetor {@code a[lo..hi]} em torno do pivô.
      * 
-     * @param a  O vetor que contém o subvetor
-     * @param lo O índice inicial (inclusivo)
-     * @param hi O índice final (inclusivo)
-     * @return A posição final do pivô após o particionamento
+     * @param a  O vetor
+     * @param lo O índice inicial
+     * @param hi O índice final
+     * @return A posição final do pivô
      */
-    
+
     private int partition(int[] a, int lo, int hi) {
         // mediana de três
         int mid = lo + (hi - lo) / 2;
@@ -82,25 +77,26 @@ public class QuickSort extends BaseSort {
     }
 
     /**
-     * Compara dois inteiros e incrementa o contador de comparações.
+     * Compara dois inteiros e conta a comparação.
      * 
      * @param x O primeiro valor
      * @param y O segundo valor
-     * @return Negativo se x &lt; y, zero se x == y, positivo se x &gt; y
+     * @return Negativo, zero ou positivo conforme a ordem de x e y
      */
+
     private int cmp(int x, int y) {
         comparisons++;
         return Integer.compare(x, y);
     }
 
     /**
-     * Troca dois elementos do vetor e incrementa o contador de trocas.
-     * Não faz nada (e não conta) se os índices forem iguais.
+     * Troca dois elementos do vetor e conta a troca.
      * 
-     * @param a O vetor onde a troca ocorre
+     * @param a O vetor
      * @param i O índice do primeiro elemento
      * @param j O índice do segundo elemento
      */
+    
     private void swap(int[] a, int i, int j) {
         if (i == j)
             return;
