@@ -1,11 +1,11 @@
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.io.File; // Importa a classe File para manipulação de arquivos
+import java.io.IOException; // Importa a classe IOException para tratamento de exceções relacionadas a entrada/saída
+import java.io.PrintWriter; // Importa a classe PrintWriter para escrita em arquivos
+import java.util.Arrays; // Importa a classe Arrays para manipulação de arrays
+import java.util.LinkedHashMap; // Importa a classe LinkedHashMap para criar mapas com ordem de inserção
+import java.util.Locale; // Importa a classe Locale para formatação de números e datas
+import java.util.Map; // Importa a classe Map para criar mapas de chave-valor
+import java.util.Set; // Importa a classe Set para criar conjuntos de elementos
 
 
 /**
